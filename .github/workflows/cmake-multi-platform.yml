@@ -17,10 +17,10 @@ jobs:
         build_type: [Release]
 
     steps:
-    - uses: ConorMacBride/install-package@v1
-      with:
-        brew: gmp
-        apt: libgmp-dev
+    # - uses: ConorMacBride/install-package@v1
+    #   with:
+    #     brew: gmp
+    #     apt: libgmp-dev
         
     - uses: actions/checkout@v3
     - name: check brew
@@ -39,6 +39,7 @@ jobs:
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -D CMAKE_INCLUDE_PATH=/opt/homebrew/Cellar/gmp/6.3.0/include
         -S ${{ github.workspace }}
 
     - name: Build
