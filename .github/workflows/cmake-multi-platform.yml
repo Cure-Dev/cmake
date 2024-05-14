@@ -17,15 +17,24 @@ jobs:
         build_type: [Release]
 
     steps:
-    # - uses: ConorMacBride/install-package@v1
-    #   with:
-    #     brew: gmp
-    #     apt: libgmp-dev
-        
     - uses: actions/checkout@v3
-    - name: check brew
-      run: 'export CMAKE_INCLUDE_PATH=/opt/homebrew/Cellar/gmp/6.3.0/include:$CMAKE_INCLUDE_PATH && export CMAKE_LIBRARY_PATH=/opt/homebrew/Cellar/gmp/6.3.0/lib:CMAKE_LIBRARY_PATH'
 
+	- name: Cache GMP
+      id: cache-gmp
+      uses: actions/cache@v3
+      with:
+        key: ${{ runner.os }}-gmp
+        path: |
+          deps/gmp
+          
+    - name: Install GMP if cache miss
+      if: steps.cache-gmp.outputs.cache-hit != 'true'
+      run: |
+      	git clone https://github.com/alisw/GMP
+      	cd GMP
+      	./configure --disable-static --enable-cxx --prefix=${{ github.workspace }}/deps/gmp
+		make install
+      	
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
