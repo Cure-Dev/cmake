@@ -25,7 +25,7 @@ jobs:
         
     - uses: actions/checkout@v3
     - name: check brew
-      run: 'brew list gmp'
+      run: 'export CPATH=/opt/homebrew/Cellar/gmp/6.3.0/include:$CPATH'
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
