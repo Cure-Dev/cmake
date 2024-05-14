@@ -30,10 +30,10 @@ jobs:
     - name: Install GMP if cache miss
       if: steps.cache-gmp.outputs.cache-hit != 'true'
       run: >
-        git clone https://github.com/alisw/GMP
-        cd GMP
-        ./configure --disable-static --enable-cxx --prefix=${{ github.workspace }}/deps/gmp
-        make install
+        git clone https://github.com/alisw/GMP;
+        cd GMP;
+        ./configure --disable-static --enable-cxx --prefix=${{ github.workspace }}/deps/gmp;
+        make install;
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
