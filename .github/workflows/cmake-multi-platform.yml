@@ -21,11 +21,10 @@ jobs:
       with:
         brew: gmp
         apt: libgmp-dev
-        choco: gmp
         
     - uses: actions/checkout@v3
     - name: check brew
-      run: 'export CPATH=/opt/homebrew/Cellar/gmp/6.3.0/include:$CPATH'
+      run: 'export CMAKE_INCLUDE_PATH=/opt/homebrew/Cellar/gmp/6.3.0/include:$CMAKE_INCLUDE_PATH && export CMAKE_LIBRARY_PATH=/opt/homebrew/Cellar/gmp/6.3.0/lib:CMAKE_LIBRARY_PATH'
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
