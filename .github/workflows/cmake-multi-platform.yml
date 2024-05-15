@@ -52,7 +52,7 @@ jobs:
       id: cache-gmp
       uses: actions/cache@v3
       with:
-        key: linux-x86-64-gmp
+        key: windows-x86-64-gmp
         path: |
           deps/gmp
           
