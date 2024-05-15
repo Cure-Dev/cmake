@@ -41,3 +41,44 @@ jobs:
         name: lit-linux-x86-64-release
         path: bin/*
         retention-days: 5
+
+  build-windows-x86-64:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: checkout gmp cache
+      id: cache-gmp
+      uses: actions/cache@v3
+      with:
+        key: linux-x86-64-gmp
+        path: |
+          deps/gmp
+          
+    - name: Install GMP if cache miss
+      if: steps.cache-gmp.outputs.cache-hit != 'true'
+      run: >
+        apt install mingw-w64;
+        wget https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz;
+        tar -xf gmp-6.3.0.tar.xz;
+        cd gmp-6.3.0;
+        ./configure --disable-static --enable-shared --enable-cxx --prefix=${{ github.workspace }}/deps/gmp --host=x86_64-w64-mingw32;
+        make install;
+        cd ${{ github.workspace }}/deps/gmp/bin;
+        mv libgmp-10.dll libgmp.dll;
+        mv libgmpxx-4.dll libgmpxx.dll;
+
+    - name: build
+      run: >
+        mkdir build;
+        cd build;
+        cmake ..;
+        make;
+
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: lit-windows-x86-64-release
+        path: bin/*
+        retention-days: 5
