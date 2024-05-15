@@ -21,12 +21,12 @@ jobs:
           
     - name: Install GMP if cache miss
       if: steps.cache-gmp.outputs.cache-hit != 'true'
-      run: |
-		wget https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz
-		tar -xf gmp-6.3.0.tar.xz
-      	cd gmp-6.3.0
-      	./configure --disable-static --enable-shared --enable-cxx --prefix=${{ github.workspace }}/deps/gmp
-		make install
+      run: >
+		wget https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz;
+		tar -xf gmp-6.3.0.tar.xz;
+      	cd gmp-6.3.0;
+      	./configure --disable-static --enable-shared --enable-cxx --prefix=${{ github.workspace }}/deps/gmp;
+		make install;
 
 	- name: build
 	  run: >
