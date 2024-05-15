@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(lit VERSION 0.0.0)
 
 set(GMP_INCLUDE_DIR "deps/gmp/include")
-set(GMP_LIBRARY_DIR "deps/gmp/lib")
+set(GMP_LIBRARY_DIR "deps/gmp/bin")
 
 include_directories(${GMP_INCLUDE_DIR})
 find_library(GMP_LIBRARY NAMES gmp PATHS ${GMP_LIBRARY_DIR})
