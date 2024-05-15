@@ -59,7 +59,7 @@ jobs:
     - name: Install GMP if cache miss
       if: steps.cache-gmp.outputs.cache-hit != 'true'
       run: >
-        apt install mingw-w64;
+        sudo apt install mingw-w64 -y;
         wget https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz;
         tar -xf gmp-6.3.0.tar.xz;
         cd gmp-6.3.0;
