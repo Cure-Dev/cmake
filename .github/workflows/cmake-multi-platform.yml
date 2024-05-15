@@ -30,9 +30,7 @@ jobs:
 
     - name: build
       run: >
-        mkdir build;
-        cd build;
-        cmake ..;
+        cmake -DCMAKE_TOOLCHAIN_FILE=./cmake/linux-x86-64.cmake -DCMAKE_BUILD_TYPE=Release .;
         make;
 
     - name: 'Upload Artifact'
@@ -65,15 +63,16 @@ jobs:
         cd gmp-6.3.0;
         ./configure --disable-static --enable-shared --enable-cxx --prefix=${{ github.workspace }}/deps/gmp --host=x86_64-w64-mingw32;
         make install;
-        cd ${{ github.workspace }}/deps/gmp/bin;
+        cd ${{ github.workspace }}/deps/gmp;
+        rm -r lib;
+        mv bin lib;
+        cd lib;
         mv libgmp-10.dll libgmp.dll;
         mv libgmpxx-4.dll libgmpxx.dll;
 
     - name: build
       run: >
-        mkdir build;
-        cd build;
-        cmake ..;
+        cmake -DCMAKE_TOOLCHAIN_FILE=./cmake/windows-x86-64.cmake -DCMAKE_BUILD_TYPE=Release .;
         make;
 
     - name: 'Upload Artifact'
