@@ -23,7 +23,7 @@ jobs:
       if: steps.cache-gmp.outputs.cache-hit != 'true'
       run: >
         mkdir deps; cd deps;
-        wget https://cdn.jsdelivr.net/gh/litlang/cpplit-deps/gmp/linux-x86-64.zip gmp.zip;
+        wget https://cdn.jsdelivr.net/gh/litlang/cpplit-deps/gmp/linux-x86-64.zip -O gmp.zip;
         unzip gmp.zip -d gmp;
 
     - name: build
