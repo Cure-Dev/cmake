@@ -61,7 +61,8 @@ jobs:
 
     - name: build
       run: >
-        cmake -DCMAKE_BUILD_TYPE=Release .;
+        mkdir build; cd build;
+        cmake -DCMAKE_BUILD_TYPE=Release ..;
         ls;
         make;
 
