@@ -61,7 +61,7 @@ jobs:
 
     - name: build
       run: >
-        cmake .;
+        cmake . -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles";
         ls;
         make;
 
