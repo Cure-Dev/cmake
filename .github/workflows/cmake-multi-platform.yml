@@ -62,6 +62,7 @@ jobs:
     - name: build
       run: >
         cmake -DCMAKE_BUILD_TYPE=Release .;
+        ls;
         make;
 
     - name: 'Upload Artifact'
