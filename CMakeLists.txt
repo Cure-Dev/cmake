@@ -6,22 +6,19 @@ project(lit VERSION 0.0.0)
 #set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 #set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 #set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".so" ".lib" ".dll")
 set(GMP_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/deps/gmp/include")
 set(GMP_LIBRARY_DIR "${PROJECT_SOURCE_DIR}/deps/gmp/lib")
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    find_file(GMP_LIBRARY libgmp.dll ${GMP_LIBRARY_DIR})
-    find_file(GMPXX_LIBRARY libgmpxx.dll ${GMP_LIBRARY_DIR})
-else ()
-    find_library(GMP_LIBRARY gmp ${GMP_LIBRARY_DIR})
-    find_library(GMPXX_LIBRARY gmpxx ${GMP_LIBRARY_DIR})
-endif()
+find_library(GMP_LIBRARY gmp ${GMP_LIBRARY_DIR})
+find_library(GMPXX_LIBRARY gmpxx ${GMP_LIBRARY_DIR})
 
 include_directories(${GMP_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} ${GMP_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${GMPXX_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${GMP_LIBRARY})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-static" LINK_SEARCH_START_STATIC TRUE LINK_SEARCH_END_STATIC TRUE)
 
 set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
