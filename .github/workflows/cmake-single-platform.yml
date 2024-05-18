@@ -1,0 +1,15 @@
+name: macos test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+    - name: download
+      run: wget https://github.com/Cure-Dev/cmake/releases/download/macos-test-v0.1/lit
+
+    - name: Test
+      run: ./lit
