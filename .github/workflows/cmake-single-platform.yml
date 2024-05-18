@@ -12,4 +12,4 @@ jobs:
       run: wget https://github.com/Cure-Dev/cmake/releases/download/macos-test-v0.1/lit
 
     - name: Test
-      run: ./lit
+      run: chmod +x lit; ./lit
