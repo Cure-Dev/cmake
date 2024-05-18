@@ -19,6 +19,8 @@ add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} ${GMPXX_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${GMP_LIBRARY})
 
+if (NOT CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-static" LINK_SEARCH_START_STATIC TRUE LINK_SEARCH_END_STATIC TRUE)
+endif()
 
 set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
