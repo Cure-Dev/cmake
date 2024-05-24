@@ -104,3 +104,36 @@ jobs:
         name: lit-macos-arm-64-release
         path: bin/*
         retention-days: 5
+
+  build-macos-x86-64:
+    runs-on: macos-13
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: checkout deps/gmp
+      id: cache-gmp
+      uses: actions/cache@v3
+      with:
+        key: deps/gmp-macos-x86-64
+        path: |
+          deps/gmp
+          
+    - name: install deps/gmp
+      if: steps.cache-gmp.outputs.cache-hit != 'true'
+      run: >
+        mkdir deps; cd deps;
+        wget https://cdn.jsdelivr.net/gh/litlang/cpplit-deps/gmp/macos-x86-64.zip -O gmp.zip;
+        unzip gmp.zip -d gmp;
+
+    - name: build
+      run: >
+        cmake -DCMAKE_BUILD_TYPE=Release .;
+        make;
+
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: lit-macos-x86-64-release
+        path: bin/*
+        retention-days: 5
