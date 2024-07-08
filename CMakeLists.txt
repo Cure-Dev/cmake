@@ -10,8 +10,8 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".so" ".lib" ".dll" ".dylib")
 set(GMP_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/deps/gmp/include")
 set(GMP_LIBRARY_DIR "${PROJECT_SOURCE_DIR}/deps/gmp/lib")
 
-find_library(GMP_LIBRARY gmp ${GMP_LIBRARY_DIR})
-find_library(GMPXX_LIBRARY gmpxx ${GMP_LIBRARY_DIR})
+find_library(GMP_LIBRARY gmp ${GMP_LIBRARY_DIR} NO_DEFAULT_PATH)
+find_library(GMPXX_LIBRARY gmpxx ${GMP_LIBRARY_DIR} NO_DEFAULT_PATH)
 
 include_directories(${GMP_INCLUDE_DIR})
 
@@ -19,7 +19,7 @@ add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} ${GMPXX_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${GMP_LIBRARY})
 
-if (NOT CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-static" LINK_SEARCH_START_STATIC TRUE LINK_SEARCH_END_STATIC TRUE)
 endif()
 
