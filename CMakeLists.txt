@@ -10,8 +10,8 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".so" ".lib" ".dll" ".dylib")
 set(GMP_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/deps/gmp/include")
 set(GMP_LIBRARY_DIR "${PROJECT_SOURCE_DIR}/deps/gmp/lib")
 
-find_library(GMP_LIBRARY gmp ${GMP_LIBRARY_DIR} NO_DEFAULT_PATH)
-find_library(GMPXX_LIBRARY gmpxx ${GMP_LIBRARY_DIR} NO_DEFAULT_PATH)
+find_library(GMP_LIBRARY gmp ${GMP_LIBRARY_DIR} NO_DEFAULT_PATH REQUIRED)
+find_library(GMPXX_LIBRARY gmpxx ${GMP_LIBRARY_DIR} NO_DEFAULT_PATH REQUIRED)
 
 include_directories(${GMP_INCLUDE_DIR})
 
