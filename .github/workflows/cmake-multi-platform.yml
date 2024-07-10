@@ -128,7 +128,7 @@ jobs:
 
     - name: build
       run: >
-        cmake -DCMAKE_BUILD_TYPE=Release .;
+        cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release .;
         make;
 
     - name: 'Upload Artifact'
@@ -162,7 +162,7 @@ jobs:
     - name: build
       run: >
         mkdir bin;
-        clang++ main.cpp -Ideps/gmp/include deps/gmp/lib/libgmpxx.a deps/gmp/lib/libgmp.a -mmacos-version-min=10.9 -o bin/gmp -Werror=unaligned-access;
+        g++ main.cpp -Ideps/gmp/include deps/gmp/lib/libgmpxx.a deps/gmp/lib/libgmp.a -mmacos-version-min=10.9 -o bin/gmp -Wall -Wextra -Werror=unaligned-access;
 
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
