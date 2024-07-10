@@ -162,7 +162,7 @@ jobs:
     - name: build
       run: >
         mkdir bin;
-        clang++ main.cpp -Ideps/gmp/include deps/gmp/lib/libgmpxx.a deps/gmp/lib/libgmp.a -mmacos-version-min=10.9 -o bin/gmp -Werror=unaligned-access -malign-natural;
+        clang++ main.cpp -Ideps/gmp/include deps/gmp/lib/libgmpxx.a deps/gmp/lib/libgmp.a -mmacos-version-min=10.9 -o bin/gmp -Werror=unaligned-access;
 
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
